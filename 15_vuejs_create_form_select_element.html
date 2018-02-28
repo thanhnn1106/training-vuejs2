@@ -1,0 +1,59 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src="moment.js"></script>
+<script src="accounting.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+
+<div id="app">
+    <form> 
+        <fieldset> 
+            <legend>Choose your country</legend> 
+            <select v-model="clan"> 
+                <option v-for="(types, clan) in clans">{{clan}}</option> 
+            </select>
+        </fieldset> 
+    </form>
+
+    <select v-model="type"> 
+        <option v-for="(species, type) in clans[clan]">{{type}}</option> 
+    </select>
+
+    <select v-if="clans[clan]"> 
+        <option v-for="(animals, species) in clans[clan][type]">{{species}}</option> 
+    </select>
+
+    <div> 
+        {{choosenCountry}} 
+    </div>
+</div>
+
+<script>
+    new Vue({ 
+        el:'#app', 
+        data:{ 
+            choosenCountry: undefined,
+            clan: undefined, 
+            type: undefined,
+            clans: { 
+              mammalia: { 
+                'have fingers': { 
+                      human: 'human', 
+                      chimpanzee: 'chimpanzee' 
+                  }, 
+                  'fingerless': { 
+                      cat: 'cat', 
+                      bear: 'bear' 
+                  } 
+              }, 
+              birds: { 
+                  flying: { 
+                      eagle: 'eagle', 
+                      pidgeon: 'pidgeon' 
+                  }, 
+                  'non flying': { 
+                      chicken: 'chicken' 
+                  } 
+                  } 
+              }
+          }
+    });
+</script>

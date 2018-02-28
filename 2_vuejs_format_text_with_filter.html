@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<!--
+To change this license header, choose License Headers in Project Properties.
+To change this template file, choose Tools | Templates
+and open the template in the editor.
+-->
+<html>
+    <head> 
+        <title>Vue.js app</title> 
+        <script src="vue.js"></script>
+        <script src="jquery-3.2.1.js"></script>
+        <script src="moment.js"></script>
+    </head> 
+    <body> 
+        <div id="app"> 
+            {{ 'hello world' | capitalize }}
+        </div>
+        <div id="app1"> 
+            <p>Cat object: {{ cat }}</p>
+        </div>
+        <script>
+            Vue.filter('capitalize1', function (string) {
+                var [first, tail] = string;
+                return first.toUpperCase() + tail.join('');
+            })
+            Vue.filter('capitalize', function (string) {
+                var capitalFirst = string.charAt(0).toUpperCase();
+                var noCaseTail = string.slice(1, string.length);
+                return capitalFirst + noCaseTail;
+            })
+            new Vue({
+                el: '#app'
+            })
+            new Vue({
+                el: '#app1',
+                data: {
+                    cat: { sound: "meow" }
+                }
+            })
+        </script>
+    </body>
+    Passaglia, Andrea. Vue.js 2 Cookbook: Build modern, interactive web applications with Vue.js (Kindle Locations 824-830). Packt Publishing. Kindle Edition. 
+</html>

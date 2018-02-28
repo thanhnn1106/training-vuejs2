@@ -1,0 +1,108 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src="moment.js"></script>
+<script src="accounting.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+
+<div id="app"> 
+    <form> 
+        <!-- list of printers go here -->
+        <fieldset> 
+            <legend>What printers you want to use?</legend> 
+            <label> 
+                <input type="checkbox" v-model="outputPrinter" value="monochrome"/> 
+                Monochrome</label><br> 
+            <label> 
+                <input type="checkbox" v-model="outputPrinter" value="plasma"/> 
+                Plasma Color</label><br> 
+            <label> 
+                <input type="checkbox" v-model="outputPrinter" value="cloner"/> 
+                3D DNA Cloner</label><br> 
+            <input type="submit" value="Print now" @click.prevent="printHandler" /> 
+        </fieldset>
+    </form>
+    <div>
+        {{ outputPrinter }}
+    </div>
+</div>
+
+<div id="app2"> 
+    <form> 
+        <fieldset> 
+            <legend>Choose your gender</legend> 
+            <label> 
+                <input type="radio" v-model="gender" value="male"/> 
+                Male 
+            </label><br> 
+            <label> 
+                <input type="radio" v-model="gender" value="female"/> 
+                Female 
+            </label> <br>
+            <label> 
+                <input type="radio" v-model="gender" value="alien"/> 
+                Alien 
+            </label> 
+        </fieldset> 
+    </form>
+    <div> 
+        Choosen gender: '{{ gender }}' 
+    </div>
+</div>
+
+<div id="app3">
+    <legend>Today's animals</legend>
+    <label> 
+        <input type="radio" v-model="animal" :value="animals[i]"/> 
+        {{animals[i]}} 
+    </label><br> 
+    <label> 
+        <input type="radio" v-model="animal" :value="animals[i+1]"/> 
+        {{animals[i+1]}} 
+    </label><br>
+    <label> 
+        <input type="radio" v-model="animal" :value="animals[i+2]"/> 
+        {{animals[i+2]}} 
+    </label><br>
+    <input type="submit" value="Add to Farm" @click.prevent="addToFarm"/>
+    <div> 
+        Your farm is composed by {{ farm.join(' ') }} 
+    </div>
+</div>
+
+<script>
+    new Vue({ 
+        el:'#app', 
+        data:{ 
+            outputPrinter: [] 
+        },
+        methods: {
+            printHandler () { 
+                let printers = this.outputPrinter
+                alert('Printing with: ' + (printers.length ? printers.join(', ') : 'none') + '.')
+            }
+        }
+    });
+    new Vue({ 
+        el: '#app2', 
+        data: { 
+            genders: ['male', 'female', 'alien'], 
+            gender: undefined 
+        }
+    });
+    new Vue({ 
+        el: '#app3', 
+        data: { 
+            animals: ['🙈', '🐶', '🐈'], 
+            animal: undefined,
+            farm: [],
+            i: 0
+        },
+        methods: {
+            addToFarm () { 
+                if (this.animal === undefined) { return } 
+                this.farm.push(this.animal) 
+                this.i = Math.floor(Math.random() * (this.animals.length - 1)) 
+                this.animal = undefined 
+            }
+        }
+    });
+</script>

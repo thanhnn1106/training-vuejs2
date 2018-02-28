@@ -1,0 +1,41 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src="moment.js"></script>
+<script src="accounting.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+<div id="app1" v-html="htmlTexts[0]">
+</div>
+
+
+<div id="app2"> 
+    <thanks gift="Batman" decoration="strong"></thanks> 
+</div>
+
+
+<script>
+    Vue.component('thanks', {
+        functional: true,
+        render:
+            function (createElement, context) { 
+                let decoratedGift = createElement(context.props.decoration, context.props.gift)
+                return createElement('p', ['Dear John, thanks for ', decoratedGift])
+            },
+            props: {
+                gift: String,
+                decoration: String
+            }
+    });
+    new Vue({ 
+        el: '#app1', 
+        data: { 
+            htmlTexts: [ 
+                'Dear John,<br/>thank you for the <pre>Batman vs Superman</pre> DVD!',
+                'Dear John,<br/>thank you for <i>Ghostbusters 3</i>!',
+                'Dear John,<br/>thanks, <b>Gods of Egypt</b> is my new favourite!'
+            ]
+        }
+    });
+    new Vue({ 
+        el: '#app2', 
+        data: {}
+    });
+</script>

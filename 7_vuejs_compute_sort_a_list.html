@@ -1,0 +1,81 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src="moment.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+<div id="app"> 
+    <h3>List of expensive experiments</h3> 
+    <ul>
+        {{demoXXX()}}
+        <li v-for="exp in allExceptTerm(experiments)"> 
+            {{exp.name}} ({{exp.cost}}m )
+        </li> 
+    </ul>
+    <input v-model="term" />
+    <button @click="destroy()">Destroy</button>
+</div>
+<script>
+    var vm = new Vue({
+        el: '#app',
+        data: {
+            experiments: [
+                {name: 'RHIC Ion Collider', cost: 650, field: 'Physics'},
+                {name: 'Neptune Undersea Observatory', cost: 100, field: 'Biology'},
+                {name: 'Violinist in the Metro', cost: 3, field: 'Psychology'},
+                {name: 'Large Hadron Collider', cost: 7700, field: 'Physics'},
+                {name: 'DIY Particle Detector', cost: 0, field: 'Physics'}
+            ],
+            term: ''
+        },
+        computed: {
+            nonPhysics () {
+                return this.experiments.filter(exp => exp.field !== 'Physics');
+            },
+            allExceptTerm () {
+                return this.experiments.filter(exp => exp.field.indexOf(this.term) === -1);
+            },
+            lowCost () {
+                return this.experiments.filter(exp => exp.cost <= 3);
+            }
+        },
+        methods: {
+            nonPhysics(list) {
+                return list.filter(exp => exp.field !== 'Physics'); 
+            },
+            allExceptTerm (list) {console.log(111);
+                return this.experiments.filter(exp => exp.field.indexOf(this.term) === -1);
+            },
+            lowCost(list) { 
+                return list.filter(exp => exp.cost <= 3);
+            },
+            demoXXX () {console.log(999);
+//                return this.experiments.filter(exp => exp.field.indexOf(this.term) === -1);
+            },
+            destroy() {
+                this.$destroy();
+            }
+        },
+        beforeCreate: function() {
+            console.log('beforeCreate:');
+        },
+        created: function() {
+            console.log('created:');
+        },
+        beforeMount: function() {
+            console.log('beforeMount:');
+        },
+        mounted: function() {
+            console.log('mounted:');
+        },
+        beforeUpdate: function() {
+            console.log('beforeUpdate:');
+        },
+        updated: function() {
+            console.log('updated:');
+        },
+        beforeDestroy: function() {
+            console.log('beforeDestroy:');
+        },
+        destroyed: function() {
+            console.log('destroyed:');
+        }
+    })
+</script>

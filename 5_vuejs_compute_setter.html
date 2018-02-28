@@ -1,0 +1,33 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src="moment.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+<div id="app">
+    <h1>Compute Setter</h1>
+    <label>Legs: <input v-model="legCount" type="range"></label><br> 
+    <label>Tops: <input :value="tableCount"></label><br> 
+    <output> 
+        We are going to build {{legCount}} legs 
+        and assembly {{tableCount}} tables. 
+    </output> 
+</div>
+<script>
+    new Vue({ 
+        el: '#app', 
+        data: { 
+            legCount: 0 
+        },
+        computed: { 
+            tableCount: { 
+                get() { 
+                    return this.legCount / 4 ;
+                }, 
+                set(newValue) { 
+                    this.legCount = newValue * 4 ;
+                },
+                update(e) {alert('111');
+                    this.tableCount = e.target.value 
+                }
+            }
+        },
+    })
+</script>

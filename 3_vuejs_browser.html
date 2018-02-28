@@ -1,0 +1,67 @@
+<script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.2.1.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.10.3/moment.min.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+<script type="text/javascript" src="browser.js"></script>
+<div id="app7"> Ex7: Reacting to event click or keystroke <br/>
+    <ul>
+        <li v-for="(world, i) in worlds">{{ world }}
+            <button @click="worlds.splice(i,1)">
+                Zap!
+            </button
+        </li>
+    </ul>
+    <input v-model="newWorld" />
+    <button @click="worlds.push(newWorld)">
+        Conquer
+    </button>
+</div>
+<br/>
+<div id="app6"> Ex6: Reacting to event click or keystroke <br/>
+    <button v-on:click="toast()">
+        Toast Bread 1
+    </button>
+    <input v-model="toastedBreads" />
+    Quantity to put in the oven: {{ toastedBreads }}
+</div>
+<br/>
+<div id="app5"> Ex5: Data Binding <br/>
+    <ul v-for="n in countdown">
+        <li>{{ n }}</li>
+        <li>{{ n % 2 == 0 ? "Even" : "Odd" }}</li>
+    </ul>
+</div>
+<br/>
+<div id="app4"> Ex4: Using V-for (Object) <br/>
+    <ul>
+        <li v-for="(sound, name, index) in animals">
+            The {{ sound }} goes {{ name }} and {{ index }}
+        </li>
+    </ul>
+</div>
+<div id="app3"> Ex3: Using V-for (Array) with index <br/>
+    <ul>
+        <li v-for="(animal, i) in animals">
+            The {{ animal }} goes {{ animals[i] }}
+        </li>
+    </ul>
+</div>
+<div id="app2"> Ex2: Using V-for (Array)<br/>
+    <ul>
+        <li v-for="n in countWorlds">{{ n }}</li>
+        <li>Test</li>
+    </ul>
+</div>
+<br/>
+<div id="app1"> Ex1: Using V-for (Array)<br/>
+    <ul>
+        <li v-for="n in countWorlds">{{ 11 - n }}</li>
+        <li>Test</li>
+    </ul>
+</div>
+<br/>
+<div id="app"> Ex: Writing Hello World! <br/>
+    {{ 'Hello World' + 'World' }}<br/>
+    We conquered {{ countWorlds }} planets.<br/>
+    Hello {{ countWorlds }} worlds.
+</div>
+<br/>

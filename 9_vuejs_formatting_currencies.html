@@ -1,0 +1,43 @@
+<script src="jquery-3.2.1.min.js"></script>
+<script src="moment.js"></script>
+<script src="accounting.js"></script>
+<script type="text/javascript" src="vue.js"></script>
+<style>
+    .price {
+        text-align: right;
+    }
+</style>
+<div id="app"> 
+    <table> 
+        <thead> 
+            <tr> 
+                <th>Item</th> 
+                <th>Price</th> 
+            </tr> 
+        </thead> 
+        <tbody> 
+            <tr v-for="item in inventory"> 
+                <td>{{item.name}}</td> 
+                <td class="price">{{item.price | dollars}}</td> 
+            </tr> 
+        </tbody> 
+    </table> 
+</div>
+<script>
+    // Simple `format` string allows control of symbol position (%v = value, %s = symbol)
+    // http://openexchangerates.github.io/accounting.js/
+    Vue.filter('dollars', function (money) { 
+        return accounting.formatMoney(money, { symbol: "GBP",  format: "%v %s" }) 
+    });
+    new Vue({
+        el: '#app',
+        data: {
+            inventory: [ 
+                {name: 'tape measure', price: '7'}, 
+                {name: 'stamp', price: '0.01'}, 
+                {name: 'shark tooth', price: '1.5'}, 
+                {name: 'iphone', price: '999'} 
+            ]
+        }
+    });
+</script>
